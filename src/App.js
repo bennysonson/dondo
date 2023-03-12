@@ -1,6 +1,7 @@
 import './App.css';
 import axios from 'axios';
 
+const {REACT_APP_API_KEY} = process.env;
 let songs = [];
 const playlistIDS = ['40Vb0BdWCuGQzcAqKzYf5L', '5VgkKiWwUIhRJDFxg48RA1', '65JdYHLTHyGMzc3LaQ0BsY']
 
@@ -10,7 +11,7 @@ for (const id of playlistIDS) {
     url: 'https://spotify23.p.rapidapi.com/playlist_tracks/',
     params: { id: id, offset: '0', limit: '100' },
     headers: {
-      'X-RapidAPI-Key': 'f8e079566emsh44b588e8f93db6fp197ec8jsn083a3171aa4c',
+      'X-RapidAPI-Key': `${REACT_APP_API_KEY}`,
       'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
     }
   };
