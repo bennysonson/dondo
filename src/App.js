@@ -1,13 +1,15 @@
 import './App.css';
-import axios from 'axios';
+/* import axios from 'axios';
 import { useState, useEffect } from 'react'
 
 const { REACT_APP_API_KEY } = process.env;
-const playlistIDS = ['40Vb0BdWCuGQzcAqKzYf5L', '5VgkKiWwUIhRJDFxg48RA1', '65JdYHLTHyGMzc3LaQ0BsY']
+const playlistIDS = ['40Vb0BdWCuGQzcAqKzYf5L', '5VgkKiWwUIhRJDFxg48RA1', '65JdYHLTHyGMzc3LaQ0BsY']; */
+const allSongs = require('./sampleSongList.json').items;
 
 const App = () => {
 
-  const [isLoading, setLoading] = useState(true);
+  //Disabled until I can use free Spotify API again. For now a sample object is used
+  /* const [isLoading, setLoading] = useState(true);
   const [songs, setSongs] = useState([]);
 
   useEffect(() => {
@@ -39,14 +41,31 @@ const App = () => {
 
   if (isLoading) {
     return <div className="App">Loading database...</div>;
+  } */
+
+  //simplify objects for Dondo use
+  let songs = [];
+  for (const song of allSongs) {
+    const newSong = {
+      name: song.track.name,
+      duration: song.track.duration_ms / 1000,
+      album: song.track.album.name
+    }
+    songs.push(newSong);
   }
+  console.log(songs);
+
+  //Get random song
+  const targetSong = songs[Math.floor(Math.random() * (songs.length))];
+  console.log(targetSong);
+
 
   return (
     <div className='App'>
-      <p>
-        hello world!
-      </p>
-      {console.log(songs)}
+      <h1>Dondo</h1>
+      <div className='songInput'>
+        <input placeholder='enter a song'></input>
+      </div>
     </div>
   )
 }
