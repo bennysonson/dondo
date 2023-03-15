@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700");
+
+.app {
+    padding: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+:root {
+    --font-roboto: "Roboto Slab", serif;
+}
+
+body {
+    font-family: var(--font-roboto);
+    background-color: #212426;
+}
+
+h1 {
+    color: white;
+    justify-content: center;
+    text-align: center;
+}
+
+.songInput {
+    width: 50%;
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 1.5rem 1.75rem;
+    border-radius: 3rem;
+    background: #1f2123;
+}
+
+.songInput input {
+    flex: 1;
+    border: none;
+    font-size: 1.5rem;
+    font-family: var(--font-raleway);
+    font-weight: 500;
+    padding-right: 1rem;
+
+    outline: none;
+    color: #a1a1a1;
+    background: #1f2123;
+}
