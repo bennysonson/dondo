@@ -11,26 +11,30 @@ const App = () => {
   const [songs, setSongs] = useState([]);
 
   useEffect(() => {
-    for (const id of playlistIDS) {
-      const options = {
-        method: 'GET',
-        url: 'https://spotify23.p.rapidapi.com/playlist_tracks/',
-        params: { id: id, offset: '0', limit: '100' },
-        headers: {
-          'X-RapidAPI-Key': `${REACT_APP_API_KEY}`,
-          'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
-        }
-      };
+    async function fetchSongs() {
+      for (const id of playlistIDS) {
+        const options = {
+          method: 'GET',
+          url: 'https://spotify23.p.rapidapi.com/playlist_tracks/',
+          params: { id: id, offset: '0', limit: '100' },
+          headers: {
+            'X-RapidAPI-Key': `${REACT_APP_API_KEY}`,
+            'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
+          }
+        };
 
-      axios.request(options).then(function (response) {
-        let songsSum = songs.push(...response.data.items);
-        setSongs(songsSum);
-        console.log(songs);
-      }).catch(function (error) {
-        console.error(error);
-      });
+        try {
+          let response = await axios(options);
+          let allSongs = songs;
+          allSongs.push(...response.data.items);
+          setSongs(allSongs);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      setLoading(false);
     }
-    setLoading(false);
+    fetchSongs();
   }, []);
 
   if (isLoading) {
@@ -42,7 +46,7 @@ const App = () => {
       <p>
         hello world!
       </p>
-      {console.log(typeof(songs))}
+      {console.log(songs)}
     </div>
   )
 }
