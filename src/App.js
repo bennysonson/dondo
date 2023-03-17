@@ -1,12 +1,13 @@
 import './App.css';
 /* import axios from 'axios';
  */import { useState, useEffect } from 'react'
+import TextInput from 'react-autocomplete-input';
+import 'react-autocomplete-input/dist/bundle.css';
 
 /* const { REACT_APP_API_KEY } = process.env;
 const playlistIDS = ['40Vb0BdWCuGQzcAqKzYf5L', '5VgkKiWwUIhRJDFxg48RA1', '65JdYHLTHyGMzc3LaQ0BsY']; */
 const allSongs = require('./sampleSongList.json').items;
-let songs = [];
-let guessedSongs = [];
+let songs = [], guessedSongs = [], allSongNames = [];
 let targetSong;
 
 const App = () => {
@@ -57,6 +58,7 @@ const App = () => {
         album: song.track.album.name
       }
       songs.push(newSong);
+      allSongNames.push(song.track.name);
     }
     console.log(songs);
 
@@ -102,18 +104,17 @@ const App = () => {
               song.nameCompare = "right"
             )
 
-
             guessedSongs.push(song);
-            
+
             //To rerender
             setSearchSong(e.target.value);
-            console.log(guessedSongs);
           } else {
             alert('Invalid song');
           }
         }
       }}>
-        <input placeholder='enter a song'></input>
+        
+        <TextInput className="songSearchInput" trigger="" options={allSongNames} spacer="" defaultValue=""/>
       </div>
       {
         guessedSongs?.length > 0 ? (

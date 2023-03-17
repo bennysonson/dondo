@@ -36,7 +36,7 @@ h1 {
     background: #1f2123;
 }
 
-.songInput input {
+.songSearchInput {
     flex: 1;
     border: none;
     font-size: 1.5rem;
